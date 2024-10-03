@@ -5,7 +5,7 @@ const Calendar = ({}) => {
   
   const calendarGrid = generateCalendarGrid();
   return (
-    <div className="grid grid-cols-7">
+    <div className="grid grid-cols-7 flex-1 flex-shrink-0 overflow-y-auto px-4">
     {calendarGrid.map((monthData, index) => (
       <React.Fragment key={index}>
         <div className="col-span-7">

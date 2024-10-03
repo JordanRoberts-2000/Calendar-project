@@ -4,8 +4,10 @@ import DaysOfWeek from "./components/DaysOfWeek"
 function App() {
 
   return (
-    <div>
-      <DaysOfWeek/>
+    <div className="flex flex-col h-screen">
+      <div className="">
+        <DaysOfWeek/>
+      </div>
       <Calendar/>
     </div>
   )
