@@ -4,7 +4,7 @@ import DaysOfWeek from "./components/DaysOfWeek"
 function App() {
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-[100dvh]">
       <header className="flex flex-col py-4 gap-2 border-b border-b-neutral-300">
         <div className="p-4 flex justify-between">
           <h1 className="text-2xl font-semibold">Sezzi Calendar</h1>

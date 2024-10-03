@@ -1,5 +1,5 @@
 const isSezziDayOff = (dateToCheck: Date) => {
-  const startDate = new Date(2024, 9, 3);
+  const startDate = new Date(2024, 9, 1);
   const daysDiff = daysBetween(startDate, dateToCheck);
   return Math.floor(daysDiff / 4) % 2 !== 0;
 }
