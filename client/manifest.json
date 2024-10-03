@@ -1,0 +1,14 @@
+{
+  "name": "Sezzi calendar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icons/calendar.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-const NUMBER_OF_GENERATED_MONTHS = 12;
+const NUMBER_OF_ADDITIONAL_MONTHS = 11;
 
 type CalendarDay = {
   day: number;
@@ -19,7 +19,7 @@ const generateCalendarGrid = (): { days: CalendarDay[]; monthName: string }[] =>
   const months: { month: number; year: number }[] = [];
   
   // Generate months for the current and the next 12 months
-  for (let offset = 0; offset <= NUMBER_OF_GENERATED_MONTHS; offset++) {
+  for (let offset = 0; offset <= NUMBER_OF_ADDITIONAL_MONTHS; offset++) {
     const month = (currentMonth + offset) % 12;
     const year = currentYear + Math.floor((currentMonth + offset) / 12);
     months.push({ month, year });
