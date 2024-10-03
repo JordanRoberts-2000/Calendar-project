@@ -1,5 +1,6 @@
 import React from "react";
 import generateCalendarGrid from "../utils/generateCalendarGrid";
+import isSezziDayOff from "../utils/calculateDaysOnOne";
 
 const Calendar = ({}) => {
   
@@ -13,6 +14,7 @@ const Calendar = ({}) => {
         </div>
         {monthData.days.map((date, dateIndex) => {
           const today = new Date();
+          const dateToCheck = new Date(date.year, date.month, date.day);
           const isToday =
           date.day === today.getDate() &&
           date.month === today.getMonth() &&
@@ -20,7 +22,7 @@ const Calendar = ({}) => {
           return (
           <div
             key={`${date.year}-${date.month}-${date.day}-${dateIndex}`}
-            className={`${date.isPreviousCarryOver ? 'opacity-30' : 'font-bold'} ${isToday && "text-white"} h-[12vh] flex justify-center items-center relative`}
+            className={`${date.isPreviousCarryOver ? 'opacity-30' : 'font-bold'} ${isToday && "text-white"} ${(isSezziDayOff(dateToCheck) && !date.isPreviousCarryOver) && "text-red-400"} h-[12vh] flex justify-center items-center relative`}
           >
             {isToday && 
               <div className="absolute top-1/2 left-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 bg-red-500 -z-10 rounded-full aspect-square ">
