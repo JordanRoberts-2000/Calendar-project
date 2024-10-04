@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* 
+dialog[open] {
+  translate: 0 0;
+  transition:
+    translate 7s ease-out,
+    display 7s ease-out allow-discrete;
+
+  @starting-style {
+    translate: 0 100vh;
+  }
+}
+
+dialog {
+  z-index: 50;
+  background-color: brown;
+  translate: 0 100vh;
+  transition:
+    translate 7s ease-out,
+    display 7s ease-out allow-discrete;
+} */

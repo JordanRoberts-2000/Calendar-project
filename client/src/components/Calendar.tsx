@@ -3,10 +3,11 @@ import clsx from 'clsx';
 import generateCalendarGrid from '../utils/generateCalendarGrid';
 import isSezziDayOff from '../utils/calculateDaysOnOne';
 import isJordanDayOff from '../utils/calculateDaysOnTwo';
-import ViewDateModal from './ViewDateModal';
+import ViewDateModal from './dateModal/dateModal';
 
 const Calendar = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [addingMode, setAddingMode] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openDialog = () => {
     if (dialogRef.current) {
@@ -19,12 +20,18 @@ const Calendar = ({}) => {
     if (dialogRef.current) {
       dialogRef.current.close();
       setIsOpen(false);
+      setAddingMode(false);
     }
   };
   const calendarGrid = generateCalendarGrid();
   return (
     <>
-      <ViewDateModal onClose={() => closeDialog()} ref={dialogRef} />
+      <ViewDateModal
+        onClose={() => closeDialog()}
+        addingMode={addingMode}
+        setAddingMode={setAddingMode}
+        ref={dialogRef}
+      />
       <div className="grid grid-cols-7 flex-1 flex-shrink-0 overflow-y-auto px-4">
         {calendarGrid.map((monthData, index) => (
           <React.Fragment key={index}>
@@ -36,6 +43,11 @@ const Calendar = ({}) => {
             {monthData.days.map((date, dateIndex) => {
               const today = new Date();
               const dateToCheck = new Date(date.year, date.month, date.day);
+              const todayWithoutTime = new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                today.getDate()
+              );
               const isToday =
                 date.day === today.getDate() &&
                 date.month === today.getMonth() &&
@@ -43,6 +55,9 @@ const Calendar = ({}) => {
               return (
                 <button
                   onClick={openDialog}
+                  disabled={
+                    date.isPreviousCarryOver || dateToCheck < todayWithoutTime
+                  }
                   key={`${date.year}-${date.month}-${date.day}-${dateIndex}`}
                   className={clsx(
                     {
@@ -55,7 +70,7 @@ const Calendar = ({}) => {
                         !date.isPreviousCarryOver &&
                         !isToday,
                     },
-                    'h-[12vh] flex justify-center items-center relative border-b border-b-sky-300'
+                    'h-[10vh] flex justify-center items-center relative border-b border-b-sky-300'
                   )}
                 >
                   {isToday && (
