@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist" // Directory where compiled files will go
+  },
+  "include": ["src/**/*.ts"], // Include TypeScript files in the src folder
+  "exclude": ["node_modules"]
+}
