@@ -1,4 +1,5 @@
-import DateNotes from '../DateNotes';
+import DateNotes from './DateNotes';
+import { Button } from '../ui/button';
 
 type Props = {
   setAddingMode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -6,17 +7,16 @@ type Props = {
 
 const viewNotesSection = ({ setAddingMode }: Props) => {
   return (
-    <div className="flex flex-col gap-4 h-full">
+    <>
       <DateNotes />
-      <div>
-        <button
-          onClick={() => setAddingMode(true)}
-          className="bg-red-500 text-white w-full py-2 rounded-md font-bold text-xl"
-        >
-          Add Event
-        </button>
-      </div>
-    </div>
+      <Button
+        className="my-4 h-12 text-lg relative"
+        onClick={() => setAddingMode(true)}
+      >
+        <div className="absolute h-6 w-full bg-gradient-to-t mb-3 from-white to-white/0 via-white/50 bottom-full"></div>
+        Add event
+      </Button>
+    </>
   );
 };
 

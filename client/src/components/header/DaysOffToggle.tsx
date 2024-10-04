@@ -1,18 +1,80 @@
-import coupleIcon from '../../assets/svgs/group.svg';
-import personOneIcon from '../../assets/svgs/man.svg';
-import personTwoIcon from '../../assets/svgs/woman.svg';
+import useStore from '../../store';
+import groupIcon from '../../assets/svgs/group.svg';
+import JordansIcon from '../../assets/svgs/man.svg';
+import SarahsIcon from '../../assets/svgs/woman.svg';
+import { ReactSVG } from 'react-svg';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { useState } from 'react';
 
 const DaysOffToggle = ({}) => {
+  const daysOffToggle = useStore((state) => state.daysOffToggle);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State to control popover open/close
+
+  const handleOptionClick = (newToggleValue: number) => {
+    useStore.setState(() => ({ daysOffToggle: newToggleValue }));
+    setIsPopoverOpen(false); // Close the popover
+  };
   return (
-    <div>
-      <svg
-        className="size-6"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 320 512"
-      >
-        <path d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304l0 128c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-223.1L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6l29.7 0c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9 232 480c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-128-16 0z" />
-      </svg>
-    </div>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+      <PopoverTrigger className="ml-2 mb-4">
+        {daysOffToggle === 0 && (
+          <ReactSVG
+            className="size-6 flex justify-center items-center"
+            src={groupIcon}
+          />
+        )}
+        {daysOffToggle === 1 && (
+          <ReactSVG
+            className="size-6 flex justify-center items-center"
+            src={SarahsIcon}
+          />
+        )}
+        {daysOffToggle === 2 && (
+          <ReactSVG
+            className="size-6 flex justify-center items-center"
+            src={JordansIcon}
+          />
+        )}
+      </PopoverTrigger>
+      <PopoverContent className="ml-4 w-fit text-sm font-semibold text-gray-500">
+        <div className="flex flex-col gap-4">
+          <button
+            className="flex gap-4 items-center"
+            onClick={() => handleOptionClick(0)}
+          >
+            <ReactSVG
+              className="size-6 flex justify-center items-center"
+              src={groupIcon}
+            />
+            <p>Show shared days off</p>
+          </button>
+          <button
+            className="flex gap-4 items-center"
+            onClick={() => handleOptionClick(1)}
+          >
+            <ReactSVG
+              className="size-6 flex justify-center items-center"
+              src={SarahsIcon}
+            />
+            <p>Show Sezzi's days off</p>
+          </button>
+          <button
+            className="flex gap-4 items-center"
+            onClick={() => handleOptionClick(2)}
+          >
+            <ReactSVG
+              className="size-6 flex justify-center items-center"
+              src={JordansIcon}
+            />
+            <p>Show Jordan's days off</p>
+          </button>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 

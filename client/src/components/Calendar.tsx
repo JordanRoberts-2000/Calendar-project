@@ -4,6 +4,7 @@ import generateCalendarGrid from '../utils/generateCalendarGrid';
 import isSezziDayOff from '../utils/calculateDaysOnOne';
 import isJordanDayOff from '../utils/calculateDaysOnTwo';
 import ViewDateModal from './dateModal/dateModal';
+import useStore from '../store';
 
 const Calendar = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,7 @@ const Calendar = ({}) => {
     }
   };
   const calendarGrid = generateCalendarGrid();
+  const daysOffToggle = useStore((state) => state.daysOffToggle);
   return (
     <>
       <ViewDateModal
@@ -52,6 +54,22 @@ const Calendar = ({}) => {
                 date.day === today.getDate() &&
                 date.month === today.getMonth() &&
                 date.year === today.getFullYear();
+              let check = false; // This will store the result of your checks
+
+              switch (daysOffToggle) {
+                case 0:
+                  check =
+                    isJordanDayOff(dateToCheck) && isSezziDayOff(dateToCheck);
+                  break;
+                case 1:
+                  check = isSezziDayOff(dateToCheck);
+                  break;
+                case 2:
+                  check = isJordanDayOff(dateToCheck);
+                  break;
+                default:
+                  break;
+              }
               return (
                 <button
                   onClick={openDialog}
@@ -64,17 +82,14 @@ const Calendar = ({}) => {
                       'opacity-30': date.isPreviousCarryOver,
                       'font-bold': !date.isPreviousCarryOver,
                       'text-white': isToday,
-                      'text-rose-500 text-2xl':
-                        isJordanDayOff(dateToCheck) &&
-                        isSezziDayOff(dateToCheck) &&
-                        !date.isPreviousCarryOver &&
-                        !isToday,
+                      'text-red-500':
+                        check && !date.isPreviousCarryOver && !isToday,
                     },
-                    'h-[10vh] flex justify-center items-center relative border-b border-b-sky-300'
+                    'h-[10vh] flex justify-center items-center relative border-b border-b-neutral-300'
                   )}
                 >
                   {isToday && (
-                    <span className="absolute top-1/2 left-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 bg-sky-300 -z-10 rounded-full aspect-square "></span>
+                    <span className="absolute top-1/2 left-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 bg-neutral-900 -z-10 rounded-xl aspect-square "></span>
                   )}
                   {/* {!isToday && !date.isPreviousCarryOver && (
                     <span className="absolute bottom-4 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-sky-600 -z-10 size-1.5 rounded-full"></span> // h-0.5 w-6 // size-1.5 rounded-full

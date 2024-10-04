@@ -1,18 +1,54 @@
 [
   {
     "id": 1,
-    "note": "this is some dilicious soup"
+    "note": "This is some dilicious soup then i will be a fat seal, i really want an oyster that I had at the beach that one time"
   },
   {
     "id": 2,
-    "note": "this is some dilicious pie"
+    "note": "This is some dilicious pie, i am so confused right now"
   },
   {
     "id": 3,
-    "note": "this is some dilicious pumpkin"
+    "note": "This is some dilicious pumpkin"
   },
   {
     "id": 4,
+    "note": "This is some dilicious apple"
+  },
+  {
+    "id": 5,
+    "note": "This is some dilicious soup"
+  },
+  {
+    "id": 6,
+    "note": "This is some dilicious pie"
+  },
+  {
+    "id": 7,
+    "note": "This is some dilicious pumpkin"
+  },
+  {
+    "id": 8,
+    "note": "This is some dilicious apple"
+  },
+  {
+    "id": 9,
+    "note": "This is some dilicious apple"
+  },
+  {
+    "id": 10,
+    "note": "this is some dilicious soup"
+  },
+  {
+    "id": 11,
+    "note": "this is some dilicious pie"
+  },
+  {
+    "id": 12,
+    "note": "this is some dilicious pumpkin"
+  },
+  {
+    "id": 13,
     "note": "this is some dilicious apple"
   }
 ]

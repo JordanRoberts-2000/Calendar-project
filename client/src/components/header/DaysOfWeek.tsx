@@ -1,8 +1,8 @@
 const DaysOfWeek = ({}) => {
-  const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   const today = new Date().getDate();
   return (
-    <div className="flex mx-4 bg-sky-500 rounded text-white font-bold">
+    <div className="flex mx-4 font-bold bg-sky-300 rounded-lg py-1 text-white">
       {days.map((day, i) => (
         <div
           key={i}
