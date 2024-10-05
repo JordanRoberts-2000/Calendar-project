@@ -8,7 +8,7 @@ const DateNotes = ({}) => {
       {notes.map((note) => (
         <div
           key={note.id}
-          className="flex gap-4 border border-neutral-300 p-3 rounded-md shadow-md"
+          className="flex gap-4 border border-neutral-300 p-3 rounded-md shadow"
         >
           <ReactSVG
             src={icon}

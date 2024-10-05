@@ -3,15 +3,17 @@ import { create } from 'zustand';
 export type DaysOffToggle = 'shared' | 'jordan' | 'sezzi';
 
 interface CounterState {
+  eventModalOpen: boolean;
   daysOffToggle: DaysOffToggle;
-  eventTabs: 'viewEvents' | 'addEventForm';
-  eventTypeTabs: 'shared' | 'private';
+  eventMainTab: 'viewEvents' | 'addEventForm';
+  eventTypeTab: 'shared' | 'private';
 }
 
 const useStore = create<CounterState>((_set) => ({
+  eventModalOpen: false,
   daysOffToggle: 'shared',
-  eventTabs: 'viewEvents',
-  eventTypeTabs: 'shared',
+  eventMainTab: 'viewEvents',
+  eventTypeTab: 'shared',
 }));
 
 export default useStore;

@@ -14,23 +14,24 @@ import {
 
 const addNotesSection = ({}) => {
   return (
-    <div className="flex flex-col gap-4 pt-16">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col gap-4 pt-8">
+      <div className="flex justify-between">
         <Popover>
-          <PopoverTrigger className="bg-white hover:bg-white shadow py-1 px-3 items-center flex rounded-lg">
+          <PopoverTrigger className="bg-white hover:bg-white shadow h-fit py-1 px-3 items-center flex rounded-lg">
             <span className="text-black mr-4">icon:</span>
             <EventIcon eventType="default" className="size-4" />
           </PopoverTrigger>
-          <PopoverContent
-            {...{ popover: 'auto' }}
-            className="z-50 bg-blue-900 h-[500px]"
-          >
-            woah
-          </PopoverContent>
+          <PopoverContent>woah</PopoverContent>
         </Popover>
-        <div className="flex items-center gap-8">
-          <Label htmlFor="shared">Shared:</Label>
-          <Switch defaultChecked={true} id="shared" />
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between gap-8">
+            <Label htmlFor="shared">Shared:</Label>
+            <Switch defaultChecked={true} id="shared" />
+          </div>
+          <div className="flex items-center justify-between gap-8">
+            <Label htmlFor="notify">Alert:</Label>
+            <Switch id="notify" />
+          </div>
         </div>
       </div>
       <div className="grid w-full gap-2 pt-4">

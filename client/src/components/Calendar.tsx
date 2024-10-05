@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { Fragment } from 'react';
 import clsx from 'clsx';
 import generateCalendarGrid from '../utils/generateCalendarGrid';
 import isSezziDayOff from '../utils/calculateDaysOnOne';
@@ -7,26 +7,14 @@ import EventsModal from './dateModal/EventsModal';
 import useStore from '../store';
 
 const Calendar = ({}) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const openDialog = () => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  };
-
-  const closeDialog = () => {
-    if (dialogRef.current) {
-      dialogRef.current.close();
-    }
-  };
   const calendarGrid = generateCalendarGrid();
   const daysOffToggle = useStore((state) => state.daysOffToggle);
   return (
     <>
-      <EventsModal onClose={() => closeDialog()} ref={dialogRef} />
+      <EventsModal />
       <div className="grid grid-cols-7 flex-1 flex-shrink-0 overflow-y-auto px-4">
         {calendarGrid.map((monthData, index) => (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             <div className="col-span-7 flex items-center pt-4">
               <h3 className="py-1 px-3 rounded-lg font-bold shadow mt-4 text-sm text-neutral-600">
                 {monthData.monthName}
@@ -62,7 +50,9 @@ const Calendar = ({}) => {
               }
               return (
                 <button
-                  onClick={openDialog}
+                  onClick={() =>
+                    useStore.setState(() => ({ eventModalOpen: true }))
+                  }
                   disabled={
                     date.isPreviousCarryOver || dateToCheck < todayWithoutTime
                   }
@@ -88,7 +78,7 @@ const Calendar = ({}) => {
                 </button>
               );
             })}
-          </React.Fragment>
+          </Fragment>
         ))}
         <div className="h-32"></div>
       </div>
