@@ -5,7 +5,7 @@ import useStore from '@/store';
 
 const viewNotesSection = ({}) => {
   return (
-    <Tabs defaultValue="shared" className="flex flex-col h-full">
+    <Tabs defaultValue="shared" className="flex flex-col gap-4 h-full py-12">
       <TabsList className="w-fit">
         <TabsTrigger value="shared">Shared events</TabsTrigger>
         <TabsTrigger value="private">Private events</TabsTrigger>

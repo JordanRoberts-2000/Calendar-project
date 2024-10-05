@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg';
 
 const DateNotes = ({}) => {
   return (
-    <div className="flex flex-col gap-4 py-6 relative">
+    <div className="flex flex-col gap-4 relative">
       {notes.map((note) => (
         <div
           key={note.id}

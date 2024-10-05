@@ -1,14 +1,11 @@
 import useStore, { type DaysOffToggle } from '../../store';
-import groupIcon from '../../assets/svgs/group.svg';
-import JordansIcon from '../../assets/svgs/man.svg';
-import SarahsIcon from '../../assets/svgs/woman.svg';
-import { ReactSVG } from 'react-svg';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { useState } from 'react';
+import EventIcon from '../EventIcon';
 
 const DaysOffToggle = ({}) => {
   const daysOffToggle = useStore((state) => state.daysOffToggle);
@@ -22,22 +19,13 @@ const DaysOffToggle = ({}) => {
     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger className="ml-2 mb-4">
         {daysOffToggle === 'shared' && (
-          <ReactSVG
-            className="size-6 flex justify-center items-center"
-            src={groupIcon}
-          />
+          <EventIcon eventType="group" className="size-6" />
         )}
         {daysOffToggle === 'sezzi' && (
-          <ReactSVG
-            className="size-6 flex justify-center items-center"
-            src={SarahsIcon}
-          />
+          <EventIcon eventType="woman" className="size-6" />
         )}
         {daysOffToggle === 'jordan' && (
-          <ReactSVG
-            className="size-6 flex justify-center items-center"
-            src={JordansIcon}
-          />
+          <EventIcon eventType="man" className="size-6" />
         )}
       </PopoverTrigger>
       <PopoverContent className="ml-4 w-fit text-sm font-semibold text-gray-500">
@@ -46,30 +34,21 @@ const DaysOffToggle = ({}) => {
             className="flex gap-4 items-center"
             onClick={() => handleOptionClick('shared')}
           >
-            <ReactSVG
-              className="size-6 flex justify-center items-center"
-              src={groupIcon}
-            />
+            <EventIcon eventType="group" className="size-6" />
             <p>Show shared days off</p>
           </button>
           <button
             className="flex gap-4 items-center"
             onClick={() => handleOptionClick('sezzi')}
           >
-            <ReactSVG
-              className="size-6 flex justify-center items-center"
-              src={SarahsIcon}
-            />
+            <EventIcon eventType="woman" className="size-6" />
             <p>Show Sezzi's days off</p>
           </button>
           <button
             className="flex gap-4 items-center"
             onClick={() => handleOptionClick('jordan')}
           >
-            <ReactSVG
-              className="size-6 flex justify-center items-center"
-              src={JordansIcon}
-            />
+            <EventIcon eventType="man" className="size-6" />
             <p>Show Jordan's days off</p>
           </button>
         </div>

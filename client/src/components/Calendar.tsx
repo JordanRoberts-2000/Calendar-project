@@ -27,9 +27,9 @@ const Calendar = ({}) => {
       <div className="grid grid-cols-7 flex-1 flex-shrink-0 overflow-y-auto px-4">
         {calendarGrid.map((monthData, index) => (
           <React.Fragment key={index}>
-            <div className="col-span-7 flex items-center pt-4 font-sans">
-              <h3 className="bg-sky-100 px-3 text-sky-500 mt-4 tracking-wider">
-                {monthData.monthName.toUpperCase()}
+            <div className="col-span-7 flex items-center pt-4">
+              <h3 className="py-1 px-3 rounded-lg font-bold shadow mt-4 text-sm text-neutral-600">
+                {monthData.monthName}
               </h3>
             </div>
             {monthData.days.map((date, dateIndex) => {
