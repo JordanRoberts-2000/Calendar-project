@@ -1,39 +1,29 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import clsx from 'clsx';
 import generateCalendarGrid from '../utils/generateCalendarGrid';
 import isSezziDayOff from '../utils/calculateDaysOnOne';
 import isJordanDayOff from '../utils/calculateDaysOnTwo';
-import ViewDateModal from './dateModal/dateModal';
+import EventsModal from './dateModal/EventsModal';
 import useStore from '../store';
 
 const Calendar = ({}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [addingMode, setAddingMode] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openDialog = () => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
-      setIsOpen(true);
     }
   };
 
   const closeDialog = () => {
     if (dialogRef.current) {
       dialogRef.current.close();
-      setIsOpen(false);
-      setAddingMode(false);
     }
   };
   const calendarGrid = generateCalendarGrid();
   const daysOffToggle = useStore((state) => state.daysOffToggle);
   return (
     <>
-      <ViewDateModal
-        onClose={() => closeDialog()}
-        addingMode={addingMode}
-        setAddingMode={setAddingMode}
-        ref={dialogRef}
-      />
+      <EventsModal onClose={() => closeDialog()} ref={dialogRef} />
       <div className="grid grid-cols-7 flex-1 flex-shrink-0 overflow-y-auto px-4">
         {calendarGrid.map((monthData, index) => (
           <React.Fragment key={index}>
@@ -57,14 +47,14 @@ const Calendar = ({}) => {
               let check = false; // This will store the result of your checks
 
               switch (daysOffToggle) {
-                case 0:
+                case 'shared':
                   check =
                     isJordanDayOff(dateToCheck) && isSezziDayOff(dateToCheck);
                   break;
-                case 1:
+                case 'sezzi':
                   check = isSezziDayOff(dateToCheck);
                   break;
-                case 2:
+                case 'jordan':
                   check = isJordanDayOff(dateToCheck);
                   break;
                 default:

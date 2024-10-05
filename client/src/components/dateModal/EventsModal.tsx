@@ -1,22 +1,21 @@
 import { forwardRef } from 'react';
-import AddNotesSection from './addNotesSection';
-import ViewNotesSection from './viewNotesSection';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AddEventsSection from './AddEventSection';
+import ViewEventsSection from './ViewEventsSection';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import useStore from '@/store';
 
-type Props = React.DialogHTMLAttributes<HTMLDialogElement> & {
-  setAddingMode: React.Dispatch<React.SetStateAction<boolean>>;
-  addingMode: boolean;
-};
+type Props = React.DialogHTMLAttributes<HTMLDialogElement>;
 
 const ViewDateModal = forwardRef<HTMLDialogElement, Props>(
-  ({ setAddingMode, addingMode, ...rest }, ref) => {
+  ({ ...rest }, ref) => {
+    const eventTab = useStore((state) => state.eventTabs);
     return (
       <dialog
         ref={ref}
         {...rest}
         className="duration-500
           translate-y-full fixed inset-0 mb-0 h-[70vh] w-full max-w-full rounded-t-3xl p-8 transition-[transform,display,overlay] allow-discrete z-50
-          open:starting:translate-y-full open:translate-y-0 backdrop:bg-none "
+          open:starting:translate-y-full open:translate-y-0"
         // backdrop:backdrop-blur-[2px] backdrop:bg-neutral-900/40
         // backdrop:transition-opacity backdrop:duration-300 backdrop:opacity-0 open:backdrop:opacity-100 open:backdrop:starting:opacity-0"
       >
@@ -38,22 +37,13 @@ const ViewDateModal = forwardRef<HTMLDialogElement, Props>(
             </svg>
           </button>
         </form>
-        <Tabs defaultValue="account" className="mx-auto flex flex-col h-full">
-          <TabsList className="w-fit">
-            <TabsTrigger value="account">Calendar notes</TabsTrigger>
-            <TabsTrigger value="password">Todos</TabsTrigger>
-          </TabsList>
-          <TabsContent
-            value="account"
-            className="flex flex-col flex-1 shrink-0 overflow-y-auto"
-          >
-            {addingMode ? (
-              <AddNotesSection setAddingMode={setAddingMode} />
-            ) : (
-              <ViewNotesSection setAddingMode={setAddingMode} />
-            )}
+        <Tabs value={eventTab} orientation="vertical" className="h-full">
+          <TabsContent value="viewEvents" className="h-full">
+            <ViewEventsSection />
           </TabsContent>
-          <TabsContent value="password">Change your password here.</TabsContent>
+          <TabsContent value="addEventForm" className="h-full">
+            <AddEventsSection />
+          </TabsContent>
         </Tabs>
       </dialog>
     );

@@ -1,4 +1,4 @@
-import useStore from '../../store';
+import useStore, { type DaysOffToggle } from '../../store';
 import groupIcon from '../../assets/svgs/group.svg';
 import JordansIcon from '../../assets/svgs/man.svg';
 import SarahsIcon from '../../assets/svgs/woman.svg';
@@ -14,26 +14,26 @@ const DaysOffToggle = ({}) => {
   const daysOffToggle = useStore((state) => state.daysOffToggle);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false); // State to control popover open/close
 
-  const handleOptionClick = (newToggleValue: number) => {
+  const handleOptionClick = (newToggleValue: DaysOffToggle) => {
     useStore.setState(() => ({ daysOffToggle: newToggleValue }));
     setIsPopoverOpen(false); // Close the popover
   };
   return (
     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger className="ml-2 mb-4">
-        {daysOffToggle === 0 && (
+        {daysOffToggle === 'shared' && (
           <ReactSVG
             className="size-6 flex justify-center items-center"
             src={groupIcon}
           />
         )}
-        {daysOffToggle === 1 && (
+        {daysOffToggle === 'sezzi' && (
           <ReactSVG
             className="size-6 flex justify-center items-center"
             src={SarahsIcon}
           />
         )}
-        {daysOffToggle === 2 && (
+        {daysOffToggle === 'jordan' && (
           <ReactSVG
             className="size-6 flex justify-center items-center"
             src={JordansIcon}
@@ -44,7 +44,7 @@ const DaysOffToggle = ({}) => {
         <div className="flex flex-col gap-4">
           <button
             className="flex gap-4 items-center"
-            onClick={() => handleOptionClick(0)}
+            onClick={() => handleOptionClick('shared')}
           >
             <ReactSVG
               className="size-6 flex justify-center items-center"
@@ -54,7 +54,7 @@ const DaysOffToggle = ({}) => {
           </button>
           <button
             className="flex gap-4 items-center"
-            onClick={() => handleOptionClick(1)}
+            onClick={() => handleOptionClick('sezzi')}
           >
             <ReactSVG
               className="size-6 flex justify-center items-center"
@@ -64,7 +64,7 @@ const DaysOffToggle = ({}) => {
           </button>
           <button
             className="flex gap-4 items-center"
-            onClick={() => handleOptionClick(2)}
+            onClick={() => handleOptionClick('jordan')}
           >
             <ReactSVG
               className="size-6 flex justify-center items-center"
