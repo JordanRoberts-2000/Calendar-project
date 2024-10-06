@@ -12,7 +12,6 @@ import {
   SelectValue,
 } from '../ui/select';
 import SelectIconPopover from './SelectIconPopover';
-import useStore from '@/store';
 import { useState } from 'react';
 
 const addNotesSection = ({}) => {

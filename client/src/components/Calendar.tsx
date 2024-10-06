@@ -50,9 +50,10 @@ const Calendar = ({}) => {
               }
               return (
                 <button
-                  onClick={() =>
-                    useStore.setState(() => ({ eventModalOpen: true }))
-                  }
+                  onClick={() => {
+                    useStore.setState(() => ({ eventModalOpen: true }));
+                    useStore.setState(() => ({ selectedDate: dateToCheck }));
+                  }}
                   disabled={
                     date.isPreviousCarryOver || dateToCheck < todayWithoutTime
                   }

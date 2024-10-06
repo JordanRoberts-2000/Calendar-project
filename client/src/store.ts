@@ -7,6 +7,7 @@ interface CounterState {
   daysOffToggle: DaysOffToggle;
   eventMainTab: 'viewEvents' | 'addEventForm';
   eventTypeTab: 'shared' | 'private';
+  selectedDate: Date | null;
 }
 
 const useStore = create<CounterState>((_set) => ({
@@ -14,6 +15,7 @@ const useStore = create<CounterState>((_set) => ({
   daysOffToggle: 'shared',
   eventMainTab: 'viewEvents',
   eventTypeTab: 'shared',
+  selectedDate: null,
 }));
 
 export default useStore;

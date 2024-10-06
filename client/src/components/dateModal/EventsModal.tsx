@@ -14,9 +14,34 @@ import {
 import Icon from '../Icon';
 
 const ViewDateModal = () => {
-  const [eventMainTab, eventModalOpen] = useStore(
-    useShallow((state) => [state.eventMainTab, state.eventModalOpen])
+  const [eventMainTab, eventModalOpen, selectedDate] = useStore(
+    useShallow((state) => [
+      state.eventMainTab,
+      state.eventModalOpen,
+      state.selectedDate,
+    ])
   );
+  const getOrdinalSuffix = (day: number) => {
+    if (day > 3 && day < 21) return 'th'; // special case for 11th-13th
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
+
+  const formatDateWithOrdinal = (date: Date) => {
+    const day = date.getDate();
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    const ordinalSuffix = getOrdinalSuffix(day);
+
+    return `${month} ${day}${ordinalSuffix}`;
+  };
   return (
     <Drawer
       open={eventModalOpen}
@@ -24,7 +49,9 @@ const ViewDateModal = () => {
     >
       <DrawerContent className="h-[70vh] px-8 rounded-t-3xl flex flex-col">
         <DrawerHeader>
-          <DrawerTitle className="text-2xl">5th October</DrawerTitle>
+          <DrawerTitle className="text-2xl">
+            {selectedDate && formatDateWithOrdinal(selectedDate)}
+          </DrawerTitle>
           <DrawerDescription></DrawerDescription>
         </DrawerHeader>
 
