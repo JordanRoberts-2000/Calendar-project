@@ -11,17 +11,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import SelectIconPopover from './SelectIconPopover';
+import useStore from '@/store';
+import { useState } from 'react';
 
 const addNotesSection = ({}) => {
+  const [open, setOpen] = useState(false);
+  const addEventIconSelection = useStore(
+    (state) => state.addEventIconSelection
+  );
   return (
     <div className="flex flex-col gap-4 pt-8">
       <div className="flex justify-between">
-        <Popover>
+        <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger className="bg-white hover:bg-white shadow h-fit py-1 px-3 items-center flex rounded-lg">
             <span className="text-black mr-4">icon:</span>
-            <EventIcon eventType="default" className="size-4" />
+            <EventIcon eventType={addEventIconSelection} className="size-4" />
           </PopoverTrigger>
-          <PopoverContent>woah</PopoverContent>
+          <PopoverContent className="ml-2 w-fit">
+            <SelectIconPopover setOpen={setOpen} />
+          </PopoverContent>
         </Popover>
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between gap-8">
@@ -44,12 +53,11 @@ const addNotesSection = ({}) => {
       </div>
       <Select>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Theme" />
+          <SelectValue placeholder="Select message" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          <SelectItem value="light">Go to the gym</SelectItem>
+          <SelectItem value="dark">Go to morrisons</SelectItem>
         </SelectContent>
       </Select>
       <Button className="h-12 text-lg">Submit</Button>

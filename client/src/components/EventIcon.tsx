@@ -1,4 +1,4 @@
-export type EventIcon =
+export type EventCategory =
   | 'woman'
   | 'warning'
   | 'shopping'
@@ -17,11 +17,11 @@ export type EventIcon =
   | 'car';
 
 type Props = React.SVGAttributes<HTMLOrSVGElement> & {
-  eventType: EventIcon;
+  eventType: EventCategory;
 };
 
 const EventIcon = ({ eventType, ...rest }: Props) => {
-  const getEventIcon = (eventType: EventIcon) => {
+  const getEventIcon = (eventType: EventCategory) => {
     switch (eventType) {
       case 'woman':
         return (
