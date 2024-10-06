@@ -1,13 +1,13 @@
-import useStore from '@/store';
 import EventIcon, { EventCategory } from '../EventIcon';
 
 type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setEventIcon: React.Dispatch<React.SetStateAction<EventCategory>>;
 };
 
-const SelectIconPopover = ({ setOpen }: Props) => {
+const SelectIconPopover = ({ setOpen, setEventIcon }: Props) => {
   const handleIconClick = (iconType: EventCategory) => {
-    useStore.setState(() => ({ addEventIconSelection: iconType }));
+    setEventIcon(iconType);
     setOpen(false);
   };
 
