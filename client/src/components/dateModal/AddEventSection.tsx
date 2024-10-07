@@ -12,13 +12,40 @@ import {
   SelectValue,
 } from '../ui/select';
 import SelectIconPopover from './SelectIconPopover';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useStore from '@/store';
 
 const addNotesSection = ({}) => {
   const [open, setOpen] = useState(false);
   const [eventIcon, setEventIcon] = useState<EventCategory>('default');
+  const selectedDate = useStore((state) => state.selectedDate);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = {
+      category: eventIcon,
+      message: textAreaRef.current!.value,
+      date: selectedDate!,
+    };
+    const res = await fetch('/api/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    if (res.ok) {
+      //close , alert, undisable button ect
+      console.log('success');
+    } else {
+      console.log('fail!');
+    }
+  };
   return (
-    <div className="flex flex-col gap-4 pt-8">
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      className="flex flex-col gap-4 pt-8"
+    >
       <div className="flex justify-between">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger className="bg-white hover:bg-white shadow h-fit py-1 px-3 items-center flex rounded-lg">
@@ -43,6 +70,7 @@ const addNotesSection = ({}) => {
       <div className="grid w-full gap-2 pt-4">
         <Label htmlFor="message">Your message:</Label>
         <Textarea
+          ref={textAreaRef}
           placeholder="Type your message here."
           id="message"
           className="h-[100px] text-base"
@@ -58,7 +86,7 @@ const addNotesSection = ({}) => {
         </SelectContent>
       </Select>
       <Button className="h-12 text-lg">Submit</Button>
-    </div>
+    </form>
   );
 };
 

@@ -5,9 +5,10 @@ import { connectToMongoDB, closeMongoDBConnection } from "./db.js";
 const app = express();
 const db = await connectToMongoDB("calendar_app");
 
-type User = {
-  name: string;
-  age: number;
+type Event = {
+  category: string;
+  message: string;
+  date: Date;
 };
 
 // middleware
@@ -17,12 +18,12 @@ app.get("/api/events", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.post("/api/events", async (req: Request<{}, {}, User>, res) => {
-  const { name, age } = req.body;
+app.post("/api/events", async (req: Request<{}, {}, Event>, res) => {
+  const { category, message, date } = req.body;
   // ZOD
   console.log("POST /api/events");
   try {
-    await db.collection("events").insertOne({ name, age });
+    await db.collection("events").insertOne({ category, message, date });
     res.sendStatus(201);
   } catch (error) {
     // next(error); // Pass the error to the error-handling middleware
