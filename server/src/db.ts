@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { MongoClient } from "mongodb";
+import logger from "./utils/logger.js";
 
 let client: MongoClient | null = null;
 
@@ -9,10 +10,10 @@ const connectToMongoDB = async (dbName: string) => {
     if (!uri) throw Error("Failed to get mongo uri from .env");
 
     client = await MongoClient.connect(uri);
-    console.log("Connected to MongoDB");
+    logger.info("Connected to MongoDB");
     return client.db(dbName);
   } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
+    logger.error("Failed to connect to MongoDB:", error);
     throw error;
   }
 };
@@ -20,7 +21,7 @@ const connectToMongoDB = async (dbName: string) => {
 const closeMongoDBConnection = async () => {
   if (client) {
     await client.close();
-    console.log("MongoDB connection closed.");
+    logger.info("MongoDB connection closed.");
   }
 };
 
