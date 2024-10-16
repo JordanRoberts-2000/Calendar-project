@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { MongoClient } from "mongodb";
-import logger from "./utils/logger.js";
+import logger from "./logger.js";
 
 let client: MongoClient | null = null;
 

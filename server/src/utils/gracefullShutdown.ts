@@ -1,4 +1,4 @@
-import { closeMongoDBConnection } from "../db.js";
+import { closeMongoDBConnection } from "./db.js";
 import logger from "./logger.js";
 
 const gracefulShutdown = async () => {
